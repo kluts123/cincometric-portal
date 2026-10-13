@@ -4,24 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CINCOMETRIC — Project Portfolio Management for Engineering</title>
+<title>CINCOMETRIC — Practical CapEx Portfolio Control</title>
 
 <meta name="description"
-      content="CINCOMETRIC is a practical project portfolio cockpit for engineering and technical managers managing CAPEX, projects and resources across industrial sites.">
+      content="CINCOMETRIC helps engineering and technical managers coordinate CapEx project controls, Stage-Gate reviews, MOC follow-up and engineering capacity without requiring a live enterprise-system integration.">
 
 <style>
 
 :root {
-    --green-dark: #035c3a;
-    --green: #148356;
+    /* RAL 6005-inspired moss green, paired with brighter accents for contrast */
+    --green-dark: #0b3025;
+    --green: #176b4b;
     --green-mid: #299d71;
-    --green-light: #5fc9a4;
-    --green-pale: #a3e2ca;
+    --green-light: #65c9a0;
+    --green-pale: #b3e7d0;
 
-    --text: #17342a;
-    --muted: #64756e;
-    --light: #f4f8f6;
-    --border: #dfe9e4;
+    --text: #172b24;
+    --muted: #60746b;
+    --light: #f0f4f1;
+    --border: #d8e2dc;
+    --dark: #09251d;
+    --dark-panel: #10382b;
 
     --max-width: 1180px;
 }
@@ -83,10 +86,10 @@ a {
 
     height: 76px;
 
-    background: rgba(255,255,255,0.94);
+    background: rgba(9,37,29,0.96);
     backdrop-filter: blur(14px);
 
-    border-bottom: 1px solid rgba(3,92,58,0.08);
+    border-bottom: 1px solid rgba(179,231,208,0.14);
 }
 
 .nav-inner {
@@ -109,7 +112,7 @@ a {
 
     font-size: 14px;
     font-weight: 600;
-    color: #40574e;
+    color: #d2e1d9;
 }
 
 .nav-links a {
@@ -125,7 +128,7 @@ a {
 
     border-radius: 7px;
 
-    background: var(--green-dark);
+    background: var(--green);
     color: white;
 
     font-size: 14px;
@@ -148,17 +151,10 @@ a {
 .hero {
     padding: 88px 0 92px;
 
+    color: #f3f8f5;
     background:
-        radial-gradient(
-            circle at 80% 20%,
-            rgba(95,201,164,0.13),
-            transparent 35%
-        ),
-        linear-gradient(
-            180deg,
-            #f8fbf9 0%,
-            #ffffff 100%
-        );
+        radial-gradient(circle at 78% 18%, rgba(101,201,160,0.16), transparent 34%),
+        linear-gradient(135deg, #09251d 0%, #10382b 58%, #0b3025 100%);
 }
 
 .hero-grid {
@@ -217,7 +213,7 @@ a {
 .hero-text {
     max-width: 570px;
 
-    color: var(--muted);
+    color: #c2d5cb;
 
     font-size: 19px;
     line-height: 1.65;
@@ -257,15 +253,15 @@ a {
 .button-secondary {
     padding: 12px 20px;
 
-    border: 1px solid var(--border);
+    border: 1px solid rgba(179,231,208,0.38);
     border-radius: 7px;
 
-    color: var(--green-dark);
+    color: #eff8f3;
 
     font-size: 15px;
     font-weight: 650;
 
-    background: white;
+    background: rgba(255,255,255,0.06);
 
     transition:
         border 0.2s ease,
@@ -274,7 +270,7 @@ a {
 
 .button-secondary:hover {
     border-color: var(--green-light);
-    background: #f7fbf9;
+    background: rgba(255,255,255,0.12);
 }
 
 .hero-note {
@@ -282,7 +278,7 @@ a {
     align-items: center;
     gap: 10px;
 
-    color: #73847d;
+    color: #b1c8bd;
 
     font-size: 13px;
 }
@@ -300,9 +296,15 @@ a {
    HERO PHOTO MONTAGE
    ========================================================= */
 
-.hero-visual {
-    position: relative;
+.hero-visual { position: relative; }
+
+/* Embedded animated mind map */
+.mindmap-frame {
+    position: relative; width: 100%; min-height: 430px; aspect-ratio: 1.12 / 1;
+    overflow: hidden; border: 1px solid rgba(179,231,208,0.22); border-radius: 14px;
+    background: rgba(255,255,255,0.035); box-shadow: 0 18px 45px rgba(0,0,0,0.12);
 }
+.mindmap-frame iframe { display: block; width: 100%; height: 100%; min-height: 430px; border: 0; background: transparent; }
 
 .photo-grid {
     display: grid;
@@ -624,317 +626,6 @@ a {
     font-size: 12px;
 }
 
-/* =========================================================
-   DASHBOARD SECTION
-   ========================================================= */
-
-.dashboard-section {
-    padding: 105px 0;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f6faf8,
-            #edf5f1
-        );
-}
-
-.dashboard-grid {
-    display: grid;
-
-    grid-template-columns:
-        0.85fr
-        1.15fr;
-
-    gap: 70px;
-
-    align-items: center;
-}
-
-.dashboard-copy h2 {
-    margin-bottom: 19px;
-
-    font-size: clamp(32px, 4vw, 45px);
-    line-height: 1.12;
-
-    letter-spacing: -0.035em;
-}
-
-.dashboard-copy p {
-    margin-bottom: 25px;
-
-    color: var(--muted);
-
-    font-size: 16px;
-    line-height: 1.7;
-}
-
-.dashboard-list {
-    display: grid;
-    gap: 12px;
-}
-
-.dashboard-list-item {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.dashboard-list-item::before {
-    content: "";
-
-    width: 7px;
-    height: 7px;
-
-    flex: 0 0 auto;
-
-    border-radius: 50%;
-
-    background: var(--green);
-}
-
-/* =========================================================
-   DASHBOARD MOCKUP
-   ========================================================= */
-
-.dashboard-mockup {
-    padding: 20px;
-
-    border: 1px solid #d7e4de;
-    border-radius: 13px;
-
-    background: white;
-
-    box-shadow:
-        0 25px 55px rgba(3,92,58,0.12);
-}
-
-.dashboard-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding-bottom: 16px;
-
-    border-bottom: 1px solid var(--border);
-}
-
-.dashboard-title {
-    font-size: 13px;
-    font-weight: 750;
-}
-
-.dashboard-status {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-
-    color: var(--green);
-
-    font-size: 11px;
-    font-weight: 700;
-}
-
-.dashboard-status::before {
-    content: "";
-
-    width: 6px;
-    height: 6px;
-
-    border-radius: 50%;
-
-    background: var(--green);
-}
-
-.dashboard-kpis {
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 10px;
-
-    margin: 17px 0;
-}
-
-.kpi {
-    padding: 13px;
-
-    border-radius: 7px;
-
-    background: #f5f9f7;
-}
-
-.kpi-label {
-    color: #788981;
-
-    font-size: 9px;
-    text-transform: uppercase;
-
-    letter-spacing: 0.04em;
-}
-
-.kpi-value {
-    margin-top: 4px;
-
-    color: var(--green-dark);
-
-    font-size: 21px;
-    font-weight: 750;
-}
-
-.dashboard-chart {
-    height: 180px;
-
-    display: flex;
-    align-items: flex-end;
-    gap: 8px;
-
-    padding: 17px;
-
-    border-radius: 8px;
-
-    background:
-        linear-gradient(
-            180deg,
-            #f9fbfa,
-            #f1f6f3
-        );
-}
-
-.chart-bar {
-    flex: 1;
-
-    min-width: 10px;
-
-    border-radius: 3px 3px 0 0;
-
-    background:
-        linear-gradient(
-            180deg,
-            var(--green-light),
-            var(--green-dark)
-        );
-}
-
-.bar-1 { height: 38%; }
-.bar-2 { height: 52%; }
-.bar-3 { height: 45%; }
-.bar-4 { height: 67%; }
-.bar-5 { height: 59%; }
-.bar-6 { height: 76%; }
-.bar-7 { height: 72%; }
-.bar-8 { height: 87%; }
-.bar-9 { height: 81%; }
-.bar-10 { height: 93%; }
-
-/* =========================================================
-   GOLDEN RULES
-   ========================================================= */
-
-.rules {
-    padding: 90px 0;
-}
-
-.rules-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 40px;
-}
-
-.rule {
-    border-left: 2px solid var(--green-light);
-
-    padding-left: 20px;
-}
-
-.rule h3 {
-    margin-bottom: 8px;
-
-    font-size: 17px;
-}
-
-.rule p {
-    color: var(--muted);
-
-    font-size: 14px;
-    line-height: 1.65;
-}
-
-/* =========================================================
-   CTA
-   ========================================================= */
-
-.cta {
-    padding: 90px 0;
-
-    background: var(--green-dark);
-
-    color: white;
-}
-
-.cta-inner {
-    display: flex;
-
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 50px;
-}
-
-.cta h2 {
-    max-width: 650px;
-
-    font-size: clamp(30px, 4vw, 45px);
-    line-height: 1.12;
-
-    letter-spacing: -0.035em;
-}
-
-.cta p {
-    max-width: 600px;
-
-    margin-top: 14px;
-
-    color: rgba(255,255,255,0.72);
-
-    font-size: 16px;
-}
-
-.cta-button {
-    flex: 0 0 auto;
-
-    padding: 14px 23px;
-
-    border-radius: 7px;
-
-    background: white;
-    color: var(--green-dark);
-
-    font-size: 14px;
-    font-weight: 750;
-
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease;
-}
-
-.cta-button:hover {
-    background: #f2f8f5;
-
-    transform: translateY(-2px);
-}
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
 footer {
     padding: 42px 0;
 
@@ -968,8 +659,7 @@ footer {
 
 @media (max-width: 980px) {
 
-    .hero-grid,
-    .dashboard-grid {
+    .hero-grid {
         grid-template-columns: 1fr;
 
         gap: 50px;
@@ -979,9 +669,13 @@ footer {
         max-width: 720px;
     }
 
-    .feature-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
+    .feature-grid,
+    .problem-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .trust-panel {
+        grid-template-columns: 1fr;
+        gap: 28px;
     }
 
     .industry-grid {
@@ -994,9 +688,6 @@ footer {
             repeat(2, 1fr);
     }
 
-    .dashboard-grid {
-        gap: 45px;
-    }
 }
 
 @media (max-width: 720px) {
@@ -1024,13 +715,7 @@ footer {
         font-size: 17px;
     }
 
-    .photo-grid {
-        grid-template-columns: 1fr 1fr;
-
-        grid-template-rows:
-            180px
-            180px;
-    }
+    .mindmap-frame, .mindmap-frame iframe { min-height: 330px; }
 
     .positioning-inner {
         grid-template-columns: 1fr;
@@ -1044,14 +729,15 @@ footer {
 
     .feature-grid,
     .industry-grid,
-    .rules-grid {
+    .rules-grid,
+    .problem-grid,
+    .steps-grid {
         grid-template-columns: 1fr;
     }
-
-    .dashboard-kpis {
-        grid-template-columns:
-            repeat(2, 1fr);
+    .trust-panel {
+        padding: 25px;
     }
+
 
     .cta-inner {
         flex-direction: column;
@@ -1064,6 +750,143 @@ footer {
 
         gap: 20px;
     }
+}
+
+
+/* =========================================================
+   PROBLEM / IMPLEMENTATION SECTIONS
+   ========================================================= */
+.problem-section {
+    background: #f0f4f1;
+}
+.problem-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+.problem-card {
+    padding: 25px 23px;
+    border: 1px solid #d8e2dc;
+    border-radius: 10px;
+    background: #fff;
+}
+.problem-mark, .step-number {
+    display: inline-block;
+    margin-bottom: 18px;
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .1em;
+}
+.problem-card h3, .step-card h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    line-height: 1.3;
+}
+.problem-card p, .step-card p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.65;
+}
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 55px;
+}
+.step-card {
+    padding: 28px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #fff;
+}
+.trust-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 45px;
+    padding: 38px;
+    border: 1px solid rgba(179,231,208,.16);
+    border-radius: 12px;
+    color: #f3f8f5;
+    background: linear-gradient(135deg, #0b3025, #10382b);
+}
+.trust-panel h3 {
+    margin-bottom: 13px;
+    font-size: clamp(24px, 3vw, 32px);
+    line-height: 1.2;
+    letter-spacing: -.025em;
+}
+.trust-panel p {
+    color: #c2d5cb;
+    font-size: 14px;
+    line-height: 1.7;
+}
+.trust-list {
+    display: grid;
+    gap: 18px;
+    list-style: none;
+}
+.trust-list li {
+    padding-left: 17px;
+    border-left: 2px solid var(--green-light);
+}
+.trust-list strong, .trust-list span {
+    display: block;
+}
+.trust-list strong {
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+.trust-list span {
+    color: #c2d5cb;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+
+
+/* Approach cards and closing call-to-action */
+.rules { padding: 100px 0; background: #fff; }
+.rules-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.rule { padding: 25px; border: 1px solid var(--border); border-radius: 10px; background: #fff; }
+.rule h3 { margin-bottom: 10px; font-size: 18px; line-height: 1.3; }
+.rule p { color: var(--muted); font-size: 14px; line-height: 1.65; }
+.cta { padding: 65px 0; color: #f3f8f5; background: linear-gradient(135deg, #0b3025, #10382b); }
+.cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+.cta-inner > div { max-width: 760px; }
+.cta h2 { margin: 8px 0 14px; font-size: clamp(28px, 3.4vw, 42px); line-height: 1.15; letter-spacing: -.035em; }
+.cta p { max-width: 700px; color: #c2d5cb; font-size: 16px; line-height: 1.65; }
+.cta-button { display: inline-block; flex: 0 0 auto; padding: 13px 20px; border-radius: 7px; color: #fff; background: var(--green); font-size: 15px; font-weight: 700; }
+.cta-button:hover { background: #21865f; }
+@media (max-width: 980px) { .rules-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 720px) { .rules { padding: 75px 0; } .rules-grid { grid-template-columns: 1fr; } .cta-inner { flex-direction: column; align-items: flex-start; } .mindmap-frame { aspect-ratio: 1 / 1; } }
+
+/* Language selector */
+.language-control {
+    display: flex;
+    align-items: center;
+    margin-left: 22px;
+    flex: 0 0 auto;
+}
+.language-control select {
+    appearance: auto;
+    border: 1px solid rgba(179,231,208,.38);
+    border-radius: 6px;
+    padding: 8px 9px;
+    color: #e5f4ec;
+    background: #10382b;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    cursor: pointer;
+}
+.language-control select:focus-visible { outline: 2px solid #65c9a0; outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+@media (max-width: 720px) {
+    .nav-inner { gap: 12px; }
+    .nav-logo { width: 118px; }
+    .language-control { margin-left: auto; }
 }
 
 </style>
@@ -1188,11 +1011,13 @@ footer {
 
         <nav class="nav-links">
 
+            <a href="#challenge">The challenge</a>
             <a href="#product">Product</a>
 
             <a href="#industries">Industries</a>
 
             <a href="#approach">Approach</a>
+            <a href="#implementation">Implementation</a>
 
             <a href="ticket.html">Support</a>
 
@@ -1201,6 +1026,16 @@ footer {
             </a>
 
         </nav>
+
+        <div class="language-control" aria-label="Choose website language">
+            <label for="language-select" class="sr-only">Language</label>
+            <select id="language-select" aria-label="Choose language">
+                <option value="en" selected>EN</option>
+                <option value="nl">NL</option>
+                <option value="fr">FR</option>
+                <option value="de">DE</option>
+            </select>
+        </div>
 
     </div>
 
@@ -1219,42 +1054,37 @@ footer {
         <div class="hero-copy">
 
             <div class="eyebrow">
-                Engineering project control
+                Practical CapEx portfolio control
             </div>
 
-
             <h1>
-                Your projects.
-                <span>Under control.</span>
+                Stop managing your CapEx portfolio
+                <span>across disconnected spreadsheets.</span>
             </h1>
 
-
             <p class="hero-text">
-
-                CINCOMETRIC gives engineering and technical managers
-                a practical cockpit to manage projects, resources,
-                costs, schedules and risks — without turning project
-                control into another full-time job.
-
+                CINCOMETRIC helps engineering and technical managers bring Stage-Gate reviews,
+                cost forecasts, engineering capacity and Management of Change (MOC)
+                into a consistent, practical process — without the overhead of a
+                heavyweight enterprise system.
             </p>
 
 
             <div class="hero-actions">
 
                 <a
-                    href="#product"
+                    href="mailto:info@cincometric.com?subject=CINCOMETRIC%2010-minute%20technical%20demo"
                     class="button-primary">
 
-                    Discover CINCOMETRIC
+                    Request a 10-minute technical demo
 
                 </a>
 
-
                 <a
-                    href="#industries"
+                    href="#approach"
                     class="button-secondary">
 
-                    See industries
+                    How it works
 
                 </a>
 
@@ -1265,74 +1095,21 @@ footer {
 
                 <span class="hero-note-dot"></span>
 
-                Built for real engineering environments
+                No live ERP or plant OT integration required
 
             </div>
 
         </div>
 
 
-        <!-- =================================================
-             INDUSTRY PHOTO MONTAGE
-
-             Replace the four image paths below.
-             ================================================= -->
-
+        <!-- HERO MIND MAP EMBED
+             Keep your animated mind-map HTML file beside this page as mindmap.html,
+             or change the iframe src to the filename you use. -->
         <div class="hero-visual">
-
-            <div class="photo-grid">
-
-
-                <!-- PHOTO 01
-                     Process / chemical / industrial plant -->
-
-                <div class="photo photo-process">
-
-                    <img
-                        src="./process-chemical.jpg"
-                        alt="Industrial process plant and engineering infrastructure">
-
-                    <div class="photo-label">
-                        Process Industry
-                    </div>
-
-                </div>
-
-
-                <!-- PHOTO 02
-                     Energy / utilities -->
-
-                <div class="photo photo-energy">
-
-                    <img
-                        src="./energy-utilities.jpg"
-                        alt="Energy and utilities infrastructure">
-
-                    <div class="photo-label">
-                        Energy & Utilities
-                    </div>
-
-                </div>
-
-
-                <!-- PHOTO 03
-                     Water / environment -->
-
-                <div class="photo photo-water">
-
-                    <img
-                        src="./water-environment.jpg"
-                        alt="Water treatment and environmental infrastructure">
-
-                    <div class="photo-label">
-                        Water & Environment
-                    </div>
-
-                </div>
-
-
+            <div class="mindmap-frame">
+                <iframe src="./mindmap.html" title="CINCOMETRIC project-control mind map"
+                        loading="eager" scrolling="no" allow="fullscreen"></iframe>
             </div>
-
         </div>
 
     </div>
@@ -1366,7 +1143,7 @@ footer {
                 ↗
             </div>
 
-            Project controls
+            Stage-Gate & MOC discipline
 
         </div>
 
@@ -1377,7 +1154,7 @@ footer {
                 ◫
             </div>
 
-            Engineering resources
+            Engineering capacity
 
         </div>
 
@@ -1385,6 +1162,40 @@ footer {
 
 </section>
 
+<!-- ======================================================
+     THE REALITY OF PLANT CAPEX
+     ====================================================== -->
+<section class="section problem-section" id="challenge">
+    <div class="container">
+        <div class="section-heading">
+            <div class="section-kicker">The reality of plant CapEx</div>
+            <h2>More projects. More obligations. Too many disconnected files.</h2>
+            <p>When site modifications and small-to-medium investments accumulate, the gaps between spreadsheets become a management problem.</p>
+        </div>
+        <div class="problem-grid">
+            <article class="problem-card">
+                <span class="problem-mark">01</span>
+                <h3>Reporting without a common view</h3>
+                <p>Different project formats make portfolio-wide budget burn, forecasts and emerging variances difficult to compare — and time-consuming to consolidate.</p>
+            </article>
+            <article class="problem-card">
+                <span class="problem-mark">02</span>
+                <h3>MOC follow-up that depends on people</h3>
+                <p>Technical changes need the right reviews and approvals before implementation. A clear workflow helps make outstanding actions visible rather than relying on memory.</p>
+            </article>
+            <article class="problem-card">
+                <span class="problem-mark">03</span>
+                <h3>Resource constraints spotted too late</h3>
+                <p>See demand across disciplines, projects and sites earlier, so engineering bottlenecks can be discussed before they affect critical milestones.</p>
+            </article>
+            <article class="problem-card">
+                <span class="problem-mark">04</span>
+                <h3>Enterprise solutions take time</h3>
+                <p>Get a useful portfolio-level control layer without making a live ERP, MES or plant OT integration a prerequisite for getting started.</p>
+            </article>
+        </div>
+    </div>
+</section>
 
 <!-- ======================================================
      PRODUCT
@@ -1400,17 +1211,15 @@ footer {
         <div class="section-heading">
 
             <div class="section-kicker">
-                One practical cockpit
+                A practical set of controls
             </div>
 
             <h2>
-                From project data to
-                management decisions.
+                Control the portfolio. Support better decisions.
             </h2>
 
             <p>
-                CINCOMETRIC brings the information an engineering
-                manager actually needs into one operational view.
+                Bring core project controls into a consistent working view — from project status and forecast to gate reviews, MOC actions and resource demand.
             </p>
 
         </div>
@@ -1449,9 +1258,7 @@ footer {
                 </h3>
 
                 <p>
-                    Connect estimates, commitments, actuals,
-                    forecasts, schedules and changes into a
-                    practical project-control workflow.
+                    Bring estimates, commitments, actuals, forecasts, schedules and changes together in a practical project-control workflow.
                 </p>
 
             </article>
@@ -1468,9 +1275,7 @@ footer {
                 </h3>
 
                 <p>
-                    Make FEL, design, execution and close-out
-                    decisions based on structured deliverables,
-                    questions and management reviews.
+                    Apply a consistent gate process with defined deliverables, review questions and management decisions appropriate to project size and risk.
                 </p>
 
             </article>
@@ -1487,9 +1292,7 @@ footer {
                 </h3>
 
                 <p>
-                    Understand engineering demand versus available
-                    capacity at person, discipline and portfolio
-                    level.
+                    See demand by discipline and project over time to identify overloaded periods and support more realistic portfolio planning.
                 </p>
 
             </article>
@@ -1646,189 +1449,29 @@ footer {
             </article>
 
 
-            <!-- MANUFACTURING -->
+            <!-- FOOD & BIOPROCESSING -->
 
             <article class="industry-card">
 
                 <img
-                    src="./manufacturing.jpg"
-                    alt="Industrial manufacturing facility">
+                    src="./food-bioprocessing.jpg"
+                    alt="Food production and bioprocessing facility">
 
                 <div class="industry-overlay">
 
                     <h3>
-                        Manufacturing
+                        Food &amp; Bioprocessing
                     </h3>
 
                     <p>
-                        Production facilities,
-                        brownfield projects and site upgrades.
+                        Food production, biotechnology
+                        and industrial bioprocesses.
                     </p>
 
                 </div>
 
             </article>
 
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     DASHBOARD
-     ====================================================== -->
-
-<section class="dashboard-section">
-
-    <div class="container dashboard-grid">
-
-
-        <div class="dashboard-copy">
-
-            <div class="section-kicker">
-                Management cockpit
-            </div>
-
-
-            <h2>
-                See what needs
-                attention.
-            </h2>
-
-
-            <p>
-                CINCOMETRIC is designed around the questions an
-                engineering manager needs to answer — not around
-                the structure of an enterprise software package.
-            </p>
-
-
-            <div class="dashboard-list">
-
-
-                <div class="dashboard-list-item">
-                    Which projects are drifting?
-                </div>
-
-
-                <div class="dashboard-list-item">
-                    Where is engineering capacity constrained?
-                </div>
-
-
-                <div class="dashboard-list-item">
-                    What is the current forecast?
-                </div>
-
-
-                <div class="dashboard-list-item">
-                    Which packages or decisions need attention?
-                </div>
-
-
-                <div class="dashboard-list-item">
-                    Where are the portfolio risks?
-                </div>
-
-
-            </div>
-
-        </div>
-
-
-        <!-- DASHBOARD MOCKUP -->
-
-        <div class="dashboard-mockup">
-
-
-            <div class="dashboard-top">
-
-                <div class="dashboard-title">
-                    Project Portfolio
-                </div>
-
-                <div class="dashboard-status">
-                    Live portfolio view
-                </div>
-
-            </div>
-
-
-            <div class="dashboard-kpis">
-
-
-                <div class="kpi">
-
-                    <div class="kpi-label">
-                        Projects
-                    </div>
-
-                    <div class="kpi-value">
-                        42
-                    </div>
-
-                </div>
-
-
-                <div class="kpi">
-
-                    <div class="kpi-label">
-                        CAPEX
-                    </div>
-
-                    <div class="kpi-value">
-                        €38m
-                    </div>
-
-                </div>
-
-
-                <div class="kpi">
-
-                    <div class="kpi-label">
-                        On track
-                    </div>
-
-                    <div class="kpi-value">
-                        76%
-                    </div>
-
-                </div>
-
-
-                <div class="kpi">
-
-                    <div class="kpi-label">
-                        Resources
-                    </div>
-
-                    <div class="kpi-value">
-                        84%
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="dashboard-chart">
-
-                <div class="chart-bar bar-1"></div>
-                <div class="chart-bar bar-2"></div>
-                <div class="chart-bar bar-3"></div>
-                <div class="chart-bar bar-4"></div>
-                <div class="chart-bar bar-5"></div>
-                <div class="chart-bar bar-6"></div>
-                <div class="chart-bar bar-7"></div>
-                <div class="chart-bar bar-8"></div>
-                <div class="chart-bar bar-9"></div>
-                <div class="chart-bar bar-10"></div>
-
-            </div>
 
         </div>
 
@@ -1965,6 +1608,49 @@ footer {
 
 </section>
 
+<!-- ======================================================
+     SIMPLE IMPLEMENTATION & TRUST
+     ====================================================== -->
+<section class="section implementation-section" id="implementation">
+    <div class="container">
+        <div class="section-heading center">
+            <div class="section-kicker">A low-friction starting point</div>
+            <h2>Useful portfolio control, without a major integration project.</h2>
+            <p>Start with the project data you already have. Use CINCOMETRIC as a management layer alongside your existing systems.</p>
+        </div>
+
+        <div class="steps-grid">
+            <article class="step-card">
+                <span class="step-number">01 / EXPORT</span>
+                <h3>Use existing data</h3>
+                <p>Export agreed project information from your current tracking files as CSV or Excel.</p>
+            </article>
+            <article class="step-card">
+                <span class="step-number">02 / IMPORT</span>
+                <h3>Upload the files</h3>
+                <p>Load the agreed data into your CINCOMETRIC workspace, without building a live connection to plant systems.</p>
+            </article>
+            <article class="step-card">
+                <span class="step-number">03 / REVIEW</span>
+                <h3>Focus on decisions</h3>
+                <p>Review portfolio health, resource demand, forecast variances and gate or MOC follow-up in one place.</p>
+            </article>
+        </div>
+
+        <div class="trust-panel">
+            <div>
+                <div class="section-kicker">Designed for industrial environments</div>
+                <h3>Practical by design. European hosting approach.</h3>
+                <p>CINCOMETRIC is intended for engineering and technical teams in the Benelux chemical, food, energy and utilities sectors. Hosting, data-processing terms and security arrangements should be confirmed for each deployment before use with company data.</p>
+            </div>
+            <ul class="trust-list">
+                <li><strong>No live OT bridge required</strong><span>File-based workflows can keep plant control networks separate.</span></li>
+                <li><strong>Start alongside existing systems</strong><span>No need to replace your ERP or project scheduling tools to begin.</span></li>
+                <li><strong>Clear scope for a pilot</strong><span>Validate workflows, reporting and access requirements with a limited project set.</span></li>
+            </ul>
+        </div>
+    </div>
+</section>
 
 <!-- ======================================================
      CTA
@@ -1979,25 +1665,23 @@ footer {
 
         <div>
 
+            <div class="section-kicker">CINCOMETRIC · EARLY ACCESS</div>
             <h2>
-                A clearer view of your
-                engineering portfolio.
+                Make your next portfolio review more useful.
             </h2>
 
             <p>
-                CINCOMETRIC brings project data, controls and
-                engineering capacity together in one practical
-                management cockpit.
+                See how a clearer view of projects, costs and engineering capacity could work for your team.
             </p>
 
         </div>
 
 
         <a
-            href="mailto:info@cincometric.com"
+            href="mailto:info@cincometric.com?subject=CINCOMETRIC%20pilot%20discussion"
             class="cta-button">
 
-            Get in touch
+            Discuss a pilot
 
         </a>
 
@@ -2121,7 +1805,7 @@ footer {
 
         <div class="footer-text">
 
-            © 2026 CINCOMETRIC. Engineering project portfolio management.
+            © 2026 CINCOMETRIC · Practical control for engineering projects.
 
         </div>
 
@@ -2129,6 +1813,72 @@ footer {
 
 </footer>
 
+
+
+<script>
+(function () {
+  const translations = {"The challenge":{"nl":"De uitdaging","fr":"Le défi","de":"Die Herausforderung"},"Product":{"nl":"Oplossing","fr":"Solution","de":"Lösung"},"Industries":{"nl":"Sectoren","fr":"Secteurs","de":"Branchen"},"Approach":{"nl":"Aanpak","fr":"Approche","de":"Ansatz"},"Implementation":{"nl":"Implementatie","fr":"Mise en œuvre","de":"Einführung"},"Support":{"nl":"Ondersteuning","fr":"Assistance","de":"Support"},"Client Login":{"nl":"Klantlogin","fr":"Connexion client","de":"Kunden-Login"},"Practical CapEx portfolio control":{"nl":"Praktische controle over CapEx-portefeuilles","fr":"Pilotage pratique des portefeuilles CapEx","de":"Praktische Steuerung von CapEx-Portfolios"},"Stop managing your CapEx portfolio":{"nl":"Beheer uw CapEx-portefeuille niet langer","fr":"Ne gérez plus votre portefeuille CapEx","de":"Verwalten Sie Ihr CapEx-Portfolio nicht länger"},"across disconnected spreadsheets.":{"nl":"via losse spreadsheets.","fr":"avec des feuilles de calcul dispersées.","de":"über voneinander getrennte Tabellen."},"CINCOMETRIC helps engineering and technical managers bring Stage-Gate reviews,":{"nl":"CINCOMETRIC helpt engineering- en technische managers om Stage-Gate-reviews,","fr":"CINCOMETRIC aide les responsables techniques et d’ingénierie à réunir les revues Stage-Gate,","de":"CINCOMETRIC unterstützt Engineering- und technische Leiter dabei, Stage-Gate-Reviews,"},"cost forecasts, engineering capacity and Management of Change (MOC)":{"nl":"kostenprognoses, engineeringcapaciteit en Management of Change (MOC)","fr":"prévisions de coûts, capacité d’ingénierie et gestion des modifications (MOC)","de":"Kostenprognosen, Engineering-Kapazitäten und Management of Change (MOC)"},"into a consistent, practical process — without the overhead of a":{"nl":"in één praktische, consistente werkwijze onder te brengen, zonder de overhead van een","fr":"dans un processus cohérent et pratique, sans la lourdeur d’un","de":"in einen einheitlichen, praxisnahen Prozess zu integrieren – ohne den Aufwand eines"},"heavyweight enterprise system.":{"nl":"zwaar enterprise-systeem.","fr":"système d’entreprise complexe.","de":"umfangreichen Enterprise-Systems."},"Request a 10-minute technical demo":{"nl":"Vraag een technische demo van 10 minuten aan","fr":"Demander une démo technique de 10 minutes","de":"10-minütige technische Demo anfragen"},"How it works":{"nl":"Hoe het werkt","fr":"Comment ça marche","de":"So funktioniert es"},"No live ERP or plant OT integration required":{"nl":"Geen live ERP- of OT-integratie nodig","fr":"Aucune intégration ERP ou OT en temps réel requise","de":"Keine Live-ERP- oder Anlagen-OT-Integration erforderlich"},"The reality of plant CapEx":{"nl":"De realiteit van CapEx op industriële sites","fr":"La réalité des investissements CapEx sur site","de":"Die Realität von CapEx in Industrieanlagen"},"More projects. More obligations. Too many disconnected files.":{"nl":"Meer projecten. Meer verplichtingen. Te veel losse bestanden.","fr":"Plus de projets. Plus d’obligations. Trop de fichiers dispersés.","de":"Mehr Projekte. Mehr Verpflichtungen. Zu viele getrennte Dateien."},"When site modifications and small-to-medium investments accumulate, the gaps between spreadsheets become a management problem.":{"nl":"Wanneer site-aanpassingen en kleine tot middelgrote investeringen zich opstapelen, worden de gaten tussen spreadsheets een beheersprobleem.","fr":"Lorsque les modifications de site et les investissements petits à moyens s’accumulent, les écarts entre feuilles de calcul deviennent un problème de gestion.","de":"Wenn sich Anlagenänderungen und kleine bis mittlere Investitionen häufen, werden Lücken zwischen Tabellen zum Managementproblem."},"Reporting without a common view":{"nl":"Rapportage zonder gemeenschappelijk overzicht","fr":"Des rapports sans vue commune","de":"Berichte ohne gemeinsame Übersicht"},"Different project formats make portfolio-wide budget burn, forecasts and emerging variances difficult to compare — and time-consuming to consolidate.":{"nl":"Verschillende projectformats maken budgetverbruik, prognoses en afwijkingen moeilijk vergelijkbaar en tijdrovend om samen te voegen.","fr":"Des formats de projet différents compliquent la comparaison des dépenses, prévisions et écarts, et leur consolidation prend du temps.","de":"Unterschiedliche Projektformate erschweren den Vergleich von Budgetverbrauch, Prognosen und Abweichungen und machen die Konsolidierung zeitaufwendig."},"MOC follow-up that depends on people":{"nl":"MOC-opvolging die van mensen afhankelijk is","fr":"Un suivi MOC qui dépend des personnes","de":"MOC-Nachverfolgung, die von Personen abhängt"},"Technical changes need the right reviews and approvals before implementation. A clear workflow helps make outstanding actions visible rather than relying on memory.":{"nl":"Technische wijzigingen vereisen de juiste reviews en goedkeuringen vóór uitvoering. Een duidelijke workflow maakt openstaande acties zichtbaar.","fr":"Les modifications techniques nécessitent les revues et approbations adéquates avant leur mise en œuvre. Un processus clair rend les actions en attente visibles.","de":"Technische Änderungen benötigen vor der Umsetzung die richtigen Prüfungen und Freigaben. Ein klarer Ablauf macht offene Maßnahmen sichtbar."},"Resource constraints spotted too late":{"nl":"Capaciteitsproblemen te laat opgemerkt","fr":"Les contraintes de capacité détectées trop tard","de":"Kapazitätsengpässe werden zu spät erkannt"},"See demand across disciplines, projects and sites earlier, so engineering bottlenecks can be discussed before they affect critical milestones.":{"nl":"Bekijk de vraag over disciplines, projecten en sites eerder, zodat knelpunten worden besproken vóór ze kritieke mijlpalen raken.","fr":"Visualisez plus tôt la demande par discipline, projet et site afin de traiter les goulets d’étranglement avant qu’ils n’affectent les jalons critiques.","de":"Erkennen Sie den Bedarf über Disziplinen, Projekte und Standorte frühzeitig, damit Engpässe vor kritischen Meilensteinen besprochen werden."},"Enterprise solutions take time":{"nl":"Enterprise-oplossingen kosten tijd","fr":"Les solutions d’entreprise prennent du temps","de":"Enterprise-Lösungen brauchen Zeit"},"Get a useful portfolio-level control layer without making a live ERP, MES or plant OT integration a prerequisite for getting started.":{"nl":"Start met een bruikbare portfoliolaag zonder dat een live ERP-, MES- of OT-integratie vooraf nodig is.","fr":"Disposez d’un niveau de pilotage du portefeuille sans devoir commencer par une intégration ERP, MES ou OT en temps réel.","de":"Nutzen Sie eine Portfolio-Steuerungsebene, ohne zunächst eine Live-Integration von ERP, MES oder Anlagen-OT vorauszusetzen."},"A practical set of controls":{"nl":"Een praktische set beheersinstrumenten","fr":"Un ensemble pratique d’outils de pilotage","de":"Ein praxisnahes Set an Steuerungswerkzeugen"},"Control the portfolio. Support better decisions.":{"nl":"Beheers de portefeuille. Neem betere beslissingen.","fr":"Maîtrisez le portefeuille. Prenez de meilleures décisions.","de":"Das Portfolio steuern. Bessere Entscheidungen treffen."},"Bring core project controls into a consistent working view — from project status and forecast to gate reviews, MOC actions and resource demand.":{"nl":"Breng de belangrijkste projectbeheersing samen: van projectstatus en prognose tot gate-reviews, MOC-acties en capaciteitsvraag.","fr":"Réunissez les principaux contrôles projet dans une vue cohérente : statut, prévisions, revues de jalons, actions MOC et besoins en ressources.","de":"Bündeln Sie die wichtigsten Projektsteuerungsdaten in einer einheitlichen Sicht – von Status und Prognose bis zu Gate-Reviews, MOC-Maßnahmen und Ressourcenbedarf."},"Portfolio visibility":{"nl":"Portefeuilleoverzicht","fr":"Visibilité du portefeuille","de":"Portfolioübersicht"},"See projects, stages, budgets, risks and priorities across sites without maintaining another collection of spreadsheets.":{"nl":"Bekijk projecten, fasen, budgetten, risico’s en prioriteiten over verschillende sites zonder nog meer spreadsheets te onderhouden.","fr":"Visualisez projets, phases, budgets, risques et priorités entre sites sans entretenir une nouvelle série de feuilles de calcul.","de":"Behalten Sie Projekte, Phasen, Budgets, Risiken und Prioritäten standortübergreifend im Blick, ohne weitere Tabellen pflegen zu müssen."},"Project controls":{"nl":"Projectbeheersing","fr":"Contrôle des projets","de":"Projektsteuerung"},"Bring estimates, commitments, actuals, forecasts, schedules and changes together in a practical project-control workflow.":{"nl":"Breng ramingen, verplichtingen, werkelijke kosten, prognoses, planningen en wijzigingen samen in één praktische workflow.","fr":"Réunissez estimations, engagements, coûts réels, prévisions, calendriers et modifications dans un processus pratique de contrôle projet.","de":"Führen Sie Kostenschätzungen, Verpflichtungen, Ist-Kosten, Prognosen, Terminpläne und Änderungen in einem praxisnahen Ablauf zusammen."},"Stage-gate discipline":{"nl":"Stage-Gate-discipline","fr":"Discipline Stage-Gate","de":"Stage-Gate-Disziplin"},"Apply a consistent gate process with defined deliverables, review questions and management decisions appropriate to project size and risk.":{"nl":"Pas een consistent gate-proces toe met vastgelegde deliverables, reviewvragen en beslissingen afgestemd op projectomvang en risico.","fr":"Appliquez un processus de jalons cohérent, avec livrables définis, questions de revue et décisions adaptées à la taille et au risque du projet.","de":"Nutzen Sie einen einheitlichen Gate-Prozess mit definierten Lieferobjekten, Prüffragen und an Größe und Risiko angepassten Entscheidungen."},"Resource planning":{"nl":"Resourceplanning","fr":"Planification des ressources","de":"Ressourcenplanung"},"See demand by discipline and project over time to identify overloaded periods and support more realistic portfolio planning.":{"nl":"Bekijk de vraag per discipline en project doorheen de tijd om overbelasting te herkennen en realistischer te plannen.","fr":"Suivez les besoins par discipline et projet dans le temps afin d’identifier les périodes de surcharge et d’améliorer la planification.","de":"Verfolgen Sie den Bedarf nach Disziplin und Projekt im Zeitverlauf, um Überlastungen zu erkennen und realistischer zu planen."},"Procurement control":{"nl":"Aankoopbeheer","fr":"Suivi des achats","de":"Beschaffungssteuerung"},"Track packages, purchase orders, commitments, milestones and expected expenditure alongside the project schedule.":{"nl":"Volg pakketten, bestelbonnen, verplichtingen, mijlpalen en verwachte uitgaven naast de projectplanning.","fr":"Suivez les lots, commandes, engagements, jalons et dépenses prévues en lien avec le planning projet.","de":"Verfolgen Sie Pakete, Bestellungen, Verpflichtungen, Meilensteine und erwartete Ausgaben zusammen mit dem Projektterminplan."},"Management reporting":{"nl":"Managementrapportage","fr":"Rapports de gestion","de":"Managementberichte"},"Turn operational project data into concise dashboards that support engineering and portfolio decisions.":{"nl":"Zet operationele projectgegevens om in beknopte rapportage die engineering- en portfoliobeslissingen ondersteunt.","fr":"Transformez les données opérationnelles des projets en rapports concis pour soutenir les décisions d’ingénierie et de portefeuille.","de":"Machen Sie aus operativen Projektdaten kompakte Berichte, die Engineering- und Portfolioentscheidungen unterstützen."},"Built across industries":{"nl":"Voor diverse sectoren","fr":"Conçu pour plusieurs secteurs","de":"Branchenübergreifend"},"Different plants. Same project discipline.":{"nl":"Verschillende sites. Dezelfde projectdiscipline.","fr":"Des sites différents. La même discipline projet.","de":"Unterschiedliche Standorte. Dieselbe Projektdisziplin."},"The engineering challenges vary by industry, but the need for visibility, control and reliable decisions remains the same.":{"nl":"De technische uitdagingen verschillen per sector, maar de behoefte aan overzicht, beheersing en betrouwbare beslissingen blijft dezelfde.","fr":"Les défis d’ingénierie varient selon le secteur, mais le besoin de visibilité, de contrôle et de décisions fiables reste le même.","de":"Die Engineering-Herausforderungen unterscheiden sich je nach Branche; der Bedarf an Transparenz, Steuerung und verlässlichen Entscheidungen bleibt gleich."},"Process Industry":{"nl":"Procesindustrie","fr":"Industrie de procédés","de":"Prozessindustrie"},"Chemical, food, biogas, waste and industrial processing.":{"nl":"Chemie, voeding, biogas, afval en industriële verwerking.","fr":"Chimie, agroalimentaire, biogaz, déchets et procédés industriels.","de":"Chemie, Lebensmittel, Biogas, Abfall und industrielle Verarbeitung."},"Energy & Utilities":{"nl":"Energie & nutsvoorzieningen","fr":"Énergie et services publics","de":"Energie & Versorgung"},"Energy production, utilities, infrastructure and decarbonisation.":{"nl":"Energieproductie, nutsvoorzieningen, infrastructuur en decarbonisatie.","fr":"Production d’énergie, services publics, infrastructures et décarbonation.","de":"Energieerzeugung, Versorgung, Infrastruktur und Dekarbonisierung."},"Water & Environment":{"nl":"Water & milieu","fr":"Eau et environnement","de":"Wasser & Umwelt"},"Water treatment, waste management and environmental infrastructure.":{"nl":"Waterzuivering, afvalbeheer en milieu-infrastructuur.","fr":"Traitement de l’eau, gestion des déchets et infrastructures environnementales.","de":"Wasseraufbereitung, Abfallwirtschaft und Umweltinfrastruktur."},"Manufacturing":{"nl":"Maakindustrie","fr":"Industrie manufacturière","de":"Fertigung"},"Production facilities, brownfield projects and site upgrades.":{"nl":"Productiefaciliteiten, brownfieldprojecten en site-upgrades.","fr":"Sites de production, projets brownfield et modernisation d’installations.","de":"Produktionsanlagen, Brownfield-Projekte und Standortmodernisierungen."},"The CINCOMETRIC approach":{"nl":"De CINCOMETRIC-aanpak","fr":"L’approche CINCOMETRIC","de":"Der CINCOMETRIC-Ansatz"},"Less administration. Better control.":{"nl":"Minder administratie. Meer controle.","fr":"Moins d’administration. Plus de maîtrise.","de":"Weniger Administration. Bessere Steuerung."},"Good project management does not require unnecessary complexity.":{"nl":"Goed projectbeheer hoeft niet onnodig complex te zijn.","fr":"Une bonne gestion de projet ne nécessite pas de complexité inutile.","de":"Gutes Projektmanagement braucht keine unnötige Komplexität."},"One source of project truth":{"nl":"Eén betrouwbare projectbron","fr":"Une source de référence pour les projets","de":"Eine verlässliche Projektquelle"},"Bring the essential project information together instead of searching across disconnected files and systems.":{"nl":"Breng essentiële projectinformatie samen in plaats van te zoeken in losse bestanden en systemen.","fr":"Réunissez les informations essentielles au lieu de les rechercher dans des fichiers et systèmes dispersés.","de":"Bündeln Sie wichtige Projektinformationen, statt in verstreuten Dateien und Systemen zu suchen."},"Designed for engineers":{"nl":"Ontworpen voor engineers","fr":"Conçu pour les ingénieurs","de":"Für Ingenieure entwickelt"},"The interface follows the way engineering teams actually work — projects, packages, resources, decisions and actions.":{"nl":"De interface sluit aan bij de manier waarop engineeringteams werken: projecten, pakketten, resources, beslissingen en acties.","fr":"L’interface suit le travail réel des équipes d’ingénierie : projets, lots, ressources, décisions et actions.","de":"Die Oberfläche orientiert sich an der tatsächlichen Arbeit von Engineering-Teams: Projekte, Pakete, Ressourcen, Entscheidungen und Maßnahmen."},"Management at the right level":{"nl":"Beheersing op het juiste niveau","fr":"Le bon niveau de pilotage","de":"Steuerung auf der richtigen Ebene"},"Keep detailed project information available without forcing management to work at the transaction level.":{"nl":"Houd detailinformatie beschikbaar zonder management met transactiedetails te belasten.","fr":"Gardez les détails projet disponibles sans obliger la direction à travailler au niveau transactionnel.","de":"Halten Sie Projektdetails verfügbar, ohne das Management auf die Transaktionsebene zu zwingen."},"Progressive control":{"nl":"Gefaseerde beheersing","fr":"Contrôle progressif","de":"Abgestufte Steuerung"},"Apply the right level of project controls depending on project size, maturity and risk.":{"nl":"Pas het juiste niveau van projectbeheersing toe volgens omvang, maturiteit en risico.","fr":"Adaptez le niveau de contrôle à la taille, à la maturité et au risque du projet.","de":"Passen Sie die Projektsteuerung an Größe, Reifegrad und Risiko an."},"Portfolio before bureaucracy":{"nl":"Portefeuille vóór bureaucratie","fr":"Le portefeuille avant la bureaucratie","de":"Portfolio vor Bürokratie"},"Portfolio visibility should help engineering managers make decisions — not create another reporting exercise.":{"nl":"Portefeuilleoverzicht moet beslissingen ondersteunen, geen extra rapportage-oefening creëren.","fr":"La visibilité du portefeuille doit aider à décider, pas créer un exercice de reporting supplémentaire.","de":"Portfolio-Transparenz soll Entscheidungen unterstützen und keine zusätzliche Berichtspflicht schaffen."},"Practical by design":{"nl":"Praktisch ontworpen","fr":"Le pragmatisme dès la conception","de":"Von Grund auf praxisnah"},"Somewhere between Excel and heavyweight enterprise project systems is often exactly where engineering teams need to be.":{"nl":"De juiste oplossing ligt voor engineeringteams vaak ergens tussen Excel en zware enterprise-projectsystemen.","fr":"Les équipes d’ingénierie ont souvent besoin d’une solution entre Excel et les systèmes de gestion de projet d’entreprise complexes.","de":"Engineering-Teams benötigen oft genau die Lösung zwischen Excel und umfangreichen Enterprise-Projektsystemen."},"A low-friction starting point":{"nl":"Laagdrempelig starten","fr":"Un démarrage simple","de":"Ein unkomplizierter Einstieg"},"Useful portfolio control, without a major integration project.":{"nl":"Bruikbare portfoliobeheersing, zonder groot integratieproject.","fr":"Un pilotage utile du portefeuille, sans grand projet d’intégration.","de":"Nützliche Portfoliosteuerung ohne großes Integrationsprojekt."},"Start with the project data you already have. Use CINCOMETRIC as a management layer alongside your existing systems.":{"nl":"Vertrek van de projectgegevens die u al hebt. Gebruik CINCOMETRIC naast uw bestaande systemen.","fr":"Commencez avec les données projet dont vous disposez. Utilisez CINCOMETRIC en complément de vos systèmes existants.","de":"Beginnen Sie mit Ihren vorhandenen Projektdaten. Nutzen Sie CINCOMETRIC ergänzend zu Ihren bestehenden Systemen."},"Use existing data":{"nl":"Gebruik bestaande gegevens","fr":"Utiliser les données existantes","de":"Vorhandene Daten nutzen"},"Export agreed project information from your current tracking files as CSV or Excel.":{"nl":"Exporteer afgesproken projectinformatie uit uw huidige bestanden naar CSV of Excel.","fr":"Exportez les informations projet convenues depuis vos fichiers de suivi actuels en CSV ou Excel.","de":"Exportieren Sie vereinbarte Projektinformationen aus Ihren aktuellen Dateien als CSV oder Excel."},"Upload the files":{"nl":"Upload de bestanden","fr":"Charger les fichiers","de":"Dateien hochladen"},"Load the agreed data into your CINCOMETRIC workspace, without building a live connection to plant systems.":{"nl":"Laad de afgesproken gegevens in uw CINCOMETRIC-omgeving, zonder liveverbinding met installatiesystemen.","fr":"Chargez les données convenues dans votre espace CINCOMETRIC, sans connexion en temps réel aux systèmes du site.","de":"Laden Sie die vereinbarten Daten in Ihren CINCOMETRIC-Arbeitsbereich, ohne Live-Verbindung zu Anlagensystemen."},"Focus on decisions":{"nl":"Focus op beslissingen","fr":"Se concentrer sur les décisions","de":"Auf Entscheidungen konzentrieren"},"Review portfolio health, resource demand, forecast variances and gate or MOC follow-up in one place.":{"nl":"Bekijk portefeuillegezondheid, resourcevraag, prognoseafwijkingen en gate- of MOC-opvolging op één plek.","fr":"Examinez au même endroit l’état du portefeuille, les besoins en ressources, les écarts de prévision et le suivi des jalons ou MOC.","de":"Prüfen Sie Portfoliozustand, Ressourcenbedarf, Prognoseabweichungen und Gate- oder MOC-Nachverfolgung an einem Ort."},"Designed for industrial environments":{"nl":"Ontworpen voor industriële omgevingen","fr":"Conçu pour les environnements industriels","de":"Für industrielle Umgebungen entwickelt"},"Practical by design. European hosting approach.":{"nl":"Praktisch ontworpen. Europese hostingaanpak.","fr":"Pragmatique par conception. Approche d’hébergement européen.","de":"Praxisnah konzipiert. Europäischer Hosting-Ansatz."},"CINCOMETRIC is intended for engineering and technical teams in the Benelux chemical, food, energy and utilities sectors. Hosting, data-processing terms and security arrangements should be confirmed for each deployment before use with company data.":{"nl":"CINCOMETRIC is bedoeld voor engineering- en technische teams in de Benelux-sectoren chemie, voeding, energie en nutsvoorzieningen. Bevestig hosting, gegevensverwerking en beveiligingsafspraken vóór gebruik met bedrijfsgegevens.","fr":"CINCOMETRIC s’adresse aux équipes techniques et d’ingénierie des secteurs chimique, agroalimentaire, énergétique et des services publics au Benelux. L’hébergement, le traitement des données et la sécurité doivent être confirmés avant toute utilisation de données d’entreprise.","de":"CINCOMETRIC richtet sich an Engineering- und technische Teams in den Benelux-Branchen Chemie, Lebensmittel, Energie und Versorgung. Hosting, Datenverarbeitung und Sicherheitsvorkehrungen sind vor der Nutzung von Unternehmensdaten je Einsatz zu bestätigen."},"Put your project portfolio in clearer view.":{"nl":"Krijg een duidelijker beeld van uw projectportefeuille.","fr":"Obtenez une vision plus claire de votre portefeuille de projets.","de":"Verschaffen Sie sich einen klareren Überblick über Ihr Projektportfolio."},"We are looking to validate CINCOMETRIC with a small number of Benelux industrial teams. A short technical demo is a practical way to assess fit, data handling and the pilot scope.":{"nl":"We willen CINCOMETRIC valideren met een beperkt aantal industriële teams in de Benelux. Een korte technische demo helpt om de aansluiting, gegevensverwerking en pilotscope te beoordelen.","fr":"Nous souhaitons valider CINCOMETRIC avec quelques équipes industrielles du Benelux. Une courte démo technique permet d’évaluer l’adéquation, le traitement des données et le périmètre du pilote.","de":"Wir möchten CINCOMETRIC mit einer kleinen Zahl von Industrieteams in den Benelux-Ländern validieren. Eine kurze technische Demo hilft, Eignung, Datenverarbeitung und Pilotumfang zu beurteilen."},"Discuss a pilot":{"nl":"Bespreek een pilootproject","fr":"Discuter d’un projet pilote","de":"Pilotprojekt besprechen"},"© 2026 CINCOMETRIC · Practical control for engineering projects.":{"nl":"© 2026 CINCOMETRIC. Praktische beheersing van engineeringprojecten.","fr":"© 2026 CINCOMETRIC. Pilotage pratique des projets d’ingénierie.","de":"© 2026 CINCOMETRIC. Praxisnahe Steuerung von Engineering-Projekten."},"CINCOMETRIC helps engineering and technical managers bring Stage-Gate reviews, cost forecasts, engineering capacity and Management of Change (MOC) into a consistent, practical process — without the overhead of a heavyweight enterprise system.":{"nl":"CINCOMETRIC helpt engineering- en technische managers om Stage-Gate-reviews, kostenprognoses, engineeringcapaciteit en Management of Change (MOC) in één praktische, consistente werkwijze onder te brengen, zonder de overhead van een zwaar enterprise-systeem.","fr":"CINCOMETRIC aide les responsables techniques et d’ingénierie à réunir les revues Stage-Gate, les prévisions de coûts, la capacité d’ingénierie et la gestion des modifications (MOC) dans un processus cohérent et pratique, sans la lourdeur d’un système d’entreprise complexe.","de":"CINCOMETRIC unterstützt Engineering- und technische Leiter dabei, Stage-Gate-Reviews, Kostenprognosen, Engineering-Kapazitäten und Management of Change (MOC) in einen einheitlichen, praxisnahen Prozess zu integrieren – ohne den Aufwand eines umfangreichen Enterprise-Systems."},"Stage-Gate & MOC discipline":{"nl":"Stage-Gate- & MOC-discipline","fr":"Discipline Stage-Gate et MOC","de":"Stage-Gate- und MOC-Disziplin"},"Engineering capacity":{"nl":"Engineeringcapaciteit","fr":"Capacité d’ingénierie","de":"Engineering-Kapazität"},"No live OT bridge required":{"nl":"Geen live OT-koppeling nodig","fr":"Aucune liaison OT en temps réel requise","de":"Keine Live-OT-Anbindung erforderlich"},"File-based workflows can keep plant control networks separate.":{"nl":"Bestandsgebaseerde workflows houden de besturingsnetwerken van de site gescheiden.","fr":"Les processus basés sur des fichiers permettent de garder séparés les réseaux de contrôle du site.","de":"Dateibasierte Abläufe können die Anlagensteuerungsnetze getrennt halten."},"Start alongside existing systems":{"nl":"Start naast bestaande systemen","fr":"Démarrer en parallèle des systèmes existants","de":"Parallel zu bestehenden Systemen starten"},"No need to replace your ERP or project scheduling tools to begin.":{"nl":"U hoeft uw ERP- of projectplanningstools niet te vervangen om te starten.","fr":"Il n’est pas nécessaire de remplacer votre ERP ou vos outils de planification pour commencer.","de":"Sie müssen weder Ihr ERP noch Ihre Projektplanungstools ersetzen, um zu starten."},"Clear scope for a pilot":{"nl":"Duidelijke pilotscope","fr":"Périmètre pilote clair","de":"Klarer Pilotumfang"},"Validate workflows, reporting and access requirements with a limited project set.":{"nl":"Valideer workflows, rapportage en toegangsvereisten met een beperkte projectselectie.","fr":"Validez les processus, les rapports et les exigences d’accès sur un nombre limité de projets.","de":"Validieren Sie Abläufe, Berichte und Zugriffsanforderungen anhand einer begrenzten Projektauswahl."},"01 / EXPORT":{"nl":"01 / EXPORTEREN","fr":"01 / EXPORTER","de":"01 / EXPORT"},"02 / IMPORT":{"nl":"02 / IMPORTEREN","fr":"02 / IMPORTER","de":"02 / IMPORT"},"03 / REVIEW":{"nl":"03 / BEOORDELEN","fr":"03 / EXAMINER","de":"03 / PRÜFEN"}};
+  Object.assign(translations, {
+    "CINCOMETRIC helps engineering and technical managers bring Stage-Gate reviews, cost forecasts, engineering capacity and Management of Change (MOC) into a consistent, practical process — without the overhead of a heavyweight enterprise system.": {
+      nl:"CINCOMETRIC helpt engineering- en technische managers om Stage-Gate-reviews, kostenprognoses, engineeringcapaciteit en Management of Change (MOC) samen te brengen in één praktische, consistente werkwijze — zonder de overhead van een zwaar enterprise-systeem.",
+      fr:"CINCOMETRIC aide les responsables techniques et d’ingénierie à réunir les revues Stage-Gate, les prévisions de coûts, la capacité d’ingénierie et la gestion des modifications (MOC) dans un processus cohérent et pratique — sans la lourdeur d’un système d’entreprise complexe.",
+      de:"CINCOMETRIC unterstützt Engineering- und technische Leiter dabei, Stage-Gate-Reviews, Kostenprognosen, Engineering-Kapazitäten und Management of Change (MOC) in einem einheitlichen, praxisnahen Prozess zusammenzuführen — ohne den Aufwand eines umfangreichen Enterprise-Systems."
+    },
+    "Food & Bioprocessing": {nl:"Voeding & bioprocessing", fr:"Agroalimentaire et bioprocédés", de:"Lebensmittel & Bioprozesstechnik"},
+    "Food production, biotechnology and industrial bioprocesses.": {nl:"Voedingsproductie, biotechnologie en industriële bioprocessen.", fr:"Production alimentaire, biotechnologie et bioprocédés industriels.", de:"Lebensmittelproduktion, Biotechnologie und industrielle Bioprozesse."},
+    "Make your next portfolio review more useful.": {nl:"Haal meer uit uw volgende portfolio-review.", fr:"Tirez davantage de votre prochaine revue de portefeuille.", de:"Machen Sie Ihre nächste Portfolio-Review noch effektiver."},
+    "See how a clearer view of projects, costs and engineering capacity could work for your team.": {nl:"Ontdek hoe een duidelijker overzicht van projecten, kosten en engineeringcapaciteit uw team kan ondersteunen.", fr:"Découvrez comment une vue plus claire des projets, des coûts et de la capacité d’ingénierie peut aider votre équipe.", de:"Erfahren Sie, wie ein klarerer Überblick über Projekte, Kosten und Engineering-Kapazitäten Ihr Team unterstützen kann."},
+    "CINCOMETRIC · EARLY ACCESS": {nl:"CINCOMETRIC · VROEGE TOEGANG", fr:"CINCOMETRIC · ACCÈS ANTICIPÉ", de:"CINCOMETRIC · FRÜHZUGANG"},
+    "© 2026 CINCOMETRIC · Practical control for engineering projects.": {nl:"© 2026 CINCOMETRIC · Praktische beheersing van engineeringprojecten.", fr:"© 2026 CINCOMETRIC · Pilotage pratique des projets d’ingénierie.", de:"© 2026 CINCOMETRIC · Praxisnahe Steuerung von Engineering-Projekten."}
+  });
+  const selector = document.getElementById('language-select');
+  const originalContent = new WeakMap();
+  const originalTextContent = new WeakMap();
+  function applyLanguage(lang) {
+    const candidates = document.body.querySelectorAll('h1,h2,h3,h4,p,a,button,div,span,li,strong,small');
+    candidates.forEach(function (el) {
+      if (!originalContent.has(el)) originalContent.set(el, el.innerHTML);
+      if (!originalTextContent.has(el)) originalTextContent.set(el, el.textContent.replace(/\s+/g, ' ').trim());
+      if (el.children.length) return; // Preserve nested markup and layout.
+      const originalHTML = originalContent.get(el);
+      const key = originalTextContent.get(el);
+      if (!key) return;
+      const entry = translations[key];
+      const translated = lang === 'en' ? null : (entry && entry[lang]);
+      if (lang === 'en') el.innerHTML = originalHTML;
+      else if (translated) el.textContent = translated;
+    });
+    // Translate the two separately styled fragments in the hero heading.
+    const h1 = document.querySelector('.hero h1');
+    if (h1) {
+      const first = h1.childNodes[0];
+      const span = h1.querySelector('span');
+      if (first && first.nodeType === Node.TEXT_NODE) {
+        if (!originalContent.has(first)) originalContent.set(first, first.nodeValue);
+        const original = originalContent.get(first).replace(/\s+/g, ' ').trim();
+        const t = lang !== 'en' && translations[original] && translations[original][lang];
+        first.nodeValue = first.nodeValue.replace(first.nodeValue.trim(), t || original);
+      }
+      if (span) {
+        if (!originalContent.has(span)) originalContent.set(span, span.textContent);
+        const original = originalContent.get(span).replace(/\s+/g, ' ').trim();
+        const t = lang !== 'en' && translations[original] && translations[original][lang];
+        span.textContent = t || original;
+      }
+    }
+    document.documentElement.lang = lang;
+    try { localStorage.setItem('cincometric-language', lang); } catch (e) {}
+  }
+  if (selector) {
+    let saved = 'en';
+    try { saved = localStorage.getItem('cincometric-language') || 'en'; } catch (e) {}
+    if (!['en','nl','fr','de'].includes(saved)) saved = 'en';
+    selector.value = saved;
+    selector.addEventListener('change', function () { applyLanguage(selector.value); });
+    applyLanguage(saved);
+  }
+})();
+</script>
 
 </body>
 </html>
